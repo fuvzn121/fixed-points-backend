@@ -1,6 +1,32 @@
-def main():
-    print("Hello from fixed-points-backend!")
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
+
+app = FastAPI(
+    title="Fixed Points Backend",
+    description="Backend API for Fixed Points application",
+    version="0.1.0",
+)
+
+# CORS設定（フロントエンドからのアクセスを許可）
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # フロントエンドのURL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+@app.get("/")
+async def root():
+    return {"message": "Fixed Points Backend is running!"}
+
+
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy"}
 
 
 if __name__ == "__main__":
-    main()
+    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
