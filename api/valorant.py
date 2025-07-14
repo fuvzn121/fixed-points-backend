@@ -1,7 +1,7 @@
 """Valorant API エンドポイント"""
 from fastapi import APIRouter, HTTPException
 from typing import List, Dict, Any
-from services.valorant import valorant_service
+from services.valorant import get_valorant_service
 
 router = APIRouter(prefix="/api/valorant", tags=["valorant"])
 
@@ -16,7 +16,8 @@ async def get_agents(language: str = "ja-JP"):
     Returns:
         エージェント情報のリスト
     """
-    async with valorant_service as service:
+    service = get_valorant_service()
+    async with service:
         agents = await service.get_agents(language)
         if not agents:
             raise HTTPException(status_code=503, detail="Failed to fetch agents from Valorant API")
@@ -33,7 +34,8 @@ async def get_maps(language: str = "ja-JP"):
     Returns:
         マップ情報のリスト
     """
-    async with valorant_service as service:
+    service = get_valorant_service()
+    async with service:
         maps = await service.get_maps(language)
         if not maps:
             raise HTTPException(status_code=503, detail="Failed to fetch maps from Valorant API")

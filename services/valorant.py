@@ -27,7 +27,6 @@ class ValorantAPIService:
     async def __aexit__(self, *args):
         await self.client.aclose()
     
-    @lru_cache(maxsize=1)
     async def get_agents(self, language: str = "ja-JP") -> List[Dict[str, Any]]:
         """エージェント一覧を取得
         
@@ -70,7 +69,6 @@ class ValorantAPIService:
             logger.error(f"Failed to fetch agents: {e}")
             return []
     
-    @lru_cache(maxsize=1)
     async def get_maps(self, language: str = "ja-JP") -> List[Dict[str, Any]]:
         """マップ一覧を取得
         
@@ -110,5 +108,6 @@ class ValorantAPIService:
             return []
 
 
-# シングルトンインスタンス
-valorant_service = ValorantAPIService()
+# サービスのインスタンスを返す関数
+def get_valorant_service():
+    return ValorantAPIService()
