@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
+from api import valorant
 
 app = FastAPI(
     title="Fixed Points Backend",
@@ -33,6 +34,10 @@ async def root():
 @app.get("/health")
 async def health_check():
     return {"status": "healthy"}
+
+
+# APIルーターを登録
+app.include_router(valorant.router)
 
 
 if __name__ == "__main__":
