@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
-from api import valorant, auth, fixed_points
+from api import valorant, auth, fixed_points, upload
 
 app = FastAPI(
     title="Fixed Points Backend",
@@ -40,6 +40,7 @@ async def health_check():
 app.include_router(auth.router)
 app.include_router(valorant.router)
 app.include_router(fixed_points.router)
+app.include_router(upload.router)
 
 
 if __name__ == "__main__":
