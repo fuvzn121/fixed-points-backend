@@ -42,7 +42,11 @@ async def create_fixed_point(
             fixed_point_id=fixed_point.id,
             step_order=step_data.step_order,
             image_url=step_data.image_url,
-            description=step_data.description
+            description=step_data.description,
+            position_x=step_data.position_x,
+            position_y=step_data.position_y,
+            skill_position_x=step_data.skill_position_x,
+            skill_position_y=step_data.skill_position_y
         )
         db.add(step)
     

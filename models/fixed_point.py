@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Float
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from core.database import Base
@@ -29,6 +29,11 @@ class FixedPointStep(Base):
     step_order = Column(Integer, nullable=False)  # 1-5
     image_url = Column(String(500))
     description = Column(Text)
+    # マップ座標情報
+    position_x = Column(Float)  # 開始位置のX座標（0-1の正規化座標）
+    position_y = Column(Float)  # 開始位置のY座標（0-1の正規化座標）
+    skill_position_x = Column(Float)  # スキル着弾地点のX座標（0-1の正規化座標）
+    skill_position_y = Column(Float)  # スキル着弾地点のY座標（0-1の正規化座標）
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     
     # リレーション

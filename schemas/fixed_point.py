@@ -9,6 +9,11 @@ class FixedPointStepBase(BaseModel):
     step_order: int = Field(..., ge=1, le=5, description="ステップの順番（1-5）")
     image_url: Optional[str] = Field(None, max_length=500)
     description: Optional[str] = None
+    # マップ上の座標情報
+    position_x: Optional[float] = Field(None, description="マップ上のX座標（0-1の正規化座標）")
+    position_y: Optional[float] = Field(None, description="マップ上のY座標（0-1の正規化座標）")
+    skill_position_x: Optional[float] = Field(None, description="スキル着弾地点のX座標（0-1の正規化座標）")
+    skill_position_y: Optional[float] = Field(None, description="スキル着弾地点のY座標（0-1の正規化座標）")
 
 
 class FixedPointStepCreate(FixedPointStepBase):
