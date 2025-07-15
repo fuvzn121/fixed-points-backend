@@ -78,7 +78,11 @@ async def get_fixed_points(
         FixedPoint.created_at,
         User.username,
         func.count(Favorite.id).label("favorites_count")
-    ).join(User).outerjoin(Favorite)
+    ).select_from(FixedPoint).join(
+        User, User.id == FixedPoint.user_id
+    ).outerjoin(
+        Favorite, Favorite.fixed_point_id == FixedPoint.id
+    )
     
     # フィルタ適用
     if character_id:
