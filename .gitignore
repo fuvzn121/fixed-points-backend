@@ -30,3 +30,6 @@ venv.bak/
 
 # Uploads
 uploads/
+
+# Cached images
+static/images/

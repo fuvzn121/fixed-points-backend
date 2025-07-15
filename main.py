@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 import uvicorn
 from api import valorant, auth, fixed_points, upload
 
@@ -35,6 +36,9 @@ async def root():
 async def health_check():
     return {"status": "healthy"}
 
+
+# 静的ファイルの配信設定
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # APIルーターを登録
 app.include_router(auth.router)
