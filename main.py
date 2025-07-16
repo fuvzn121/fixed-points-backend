@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import uvicorn
 from api import valorant, auth, fixed_points, upload
+from routers import discord_auth, favorites
 
 app = FastAPI(
     title="Fixed Points Backend",
@@ -42,6 +43,8 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # APIルーターを登録
 app.include_router(auth.router)
+app.include_router(discord_auth.router)
+app.include_router(favorites.router)
 app.include_router(valorant.router)
 app.include_router(fixed_points.router)
 app.include_router(upload.router)
